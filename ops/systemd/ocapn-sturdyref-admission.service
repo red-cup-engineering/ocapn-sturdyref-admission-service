@@ -1,0 +1,16 @@
+[Unit]
+Description=Red Cup OCapN sturdyref admission provider
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/home/emsenn/info/lib/emsenn/services/561-group/services/red-cup-engineering/services/web-services-section/services/object-capability-services-section/services/ocapn-sturdyref-admission-service
+Environment=HOST=127.0.0.1
+Environment=PORT=18894
+Environment=MAX_REQUEST_BYTES=16384
+Environment=OCAPN_DATA_ROOT=/home/emsenn/info/lib/emsenn/services/561-group/services/red-cup-engineering/services/web-services-section/services/object-capability-services-section/services/ocapn-sturdyref-admission-service/data
+ExecStart=/home/emsenn/.config/nvm/versions/node/v24.13.1/bin/node bin/server.mjs
+Restart=on-failure
+
+[Install]
+WantedBy=default.target
