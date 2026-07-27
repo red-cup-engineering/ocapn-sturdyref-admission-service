@@ -4,12 +4,12 @@ After=network.target
 
 [Service]
 Type=simple
-WorkingDirectory=/home/emsenn/info/lib/emsenn/services/561-group/services/red-cup-engineering/services/web-services-section/services/object-capability-services-section/services/ocapn-sturdyref-admission-service
+WorkingDirectory=/home/emsenn/.local/share/561-group/releases/ocapn-sturdyref-admission-service/current
 Environment=HOST=127.0.0.1
 Environment=PORT=18894
 Environment=MAX_REQUEST_BYTES=16384
-Environment=OCAPN_DATA_ROOT=/home/emsenn/info/lib/emsenn/services/561-group/services/red-cup-engineering/services/web-services-section/services/object-capability-services-section/services/ocapn-sturdyref-admission-service/data
-ExecStart=/home/emsenn/.config/nvm/versions/node/v24.13.1/bin/node bin/server.mjs
+Environment=OCAPN_DATA_ROOT=/home/emsenn/.local/state/561-group/ocapn-sturdyref-admission-service
+ExecStart=/usr/bin/node bin/server.mjs
 Restart=on-failure
 
 [Install]
