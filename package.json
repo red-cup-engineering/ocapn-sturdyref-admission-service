@@ -16,23 +16,5 @@
   },
   "engines": {
     "node": ">=22"
-  },
-  "x-semiotic-voxel": {
-    "profile": "org.harmonious-union.semiotic-voxel.v1",
-    "owner": "red-cup-engineering",
-    "kind": "capability-cell",
-    "actor": "urn:ame:ocapn-sturdyref-admission-service",
-    "operations": [
-      "ocapn-sturdyref-admission-service"
-    ],
-    "capabilities": [
-      {
-        "capability": "ocapn-sturdyref-admission-service",
-        "faces": [
-          "ocapn-sturdyref-admission-service"
-        ]
-      }
-    ],
-    "package": "@red-cup-engineering/ocapn-sturdyref-admission-service"
   }
 }
