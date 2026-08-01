@@ -5,14 +5,14 @@
   "type": "module",
   "description": "Durably mints and admits unforgeable OCapN sturdy references for one exact capability locus.",
   "bin": {
-    "mint-ocapn-sturdyref": "./bin/mint-sturdyref.mjs",
-    "serve-ocapn-sturdyref-admission": "./bin/server.mjs"
+    "mint-ocapn-sturdyref": "./scripts/mint-sturdyref.mjs",
+    "serve-ocapn-sturdyref-admission": "./scripts/server.mjs"
   },
   "exports": {
     ".": "./src/admission.mjs"
   },
   "scripts": {
-    "verify": "node --check src/admission.mjs && node --check bin/mint-sturdyref.mjs && node --check bin/server.mjs && node --test"
+    "verify": "node --check src/admission.mjs && node --check scripts/mint-sturdyref.mjs && node --check scripts/server.mjs && node --test"
   },
   "engines": {
     "node": ">=22"
