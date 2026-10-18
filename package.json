@@ -12,9 +12,16 @@
     ".": "./src/admission.mjs"
   },
   "scripts": {
-    "verify": "node --check src/admission.mjs && node --check scripts/mint-sturdyref.mjs && node --check scripts/server.mjs && node --test"
+    "verify": "node --check src/admission.mjs && node --check scripts/mint-sturdyref.mjs && node --check scripts/server.mjs && node --test test/*.test.mjs"
   },
   "engines": {
     "node": ">=22"
+  },
+  "dependencies": {
+    "@red-cup-engineering/cryptographic-computer-data-engineering-services-section": "workspace:*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/red-cup-engineering/ocapn-sturdyref-admission-service.git"
   }
 }

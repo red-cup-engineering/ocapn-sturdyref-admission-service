@@ -1,6 +1,7 @@
 import { appendFile, mkdir, readFile } from "node:fs/promises";
-import { createHash, randomBytes } from "node:crypto";
+import { randomBytes } from "node:crypto";
 import { dirname, join } from "node:path";
+import { sha256Digest, sha256Hex } from "@red-cup-engineering/cryptographic-computer-data-engineering-services-section/integrity";
 
 const STURDYREF = /^urn:ocapn:sturdyref:[A-Za-z0-9_-]{43}$/u;
 const TEXT = /^[^\u0000-\u001f\u007f]+$/u;
@@ -12,7 +13,7 @@ function requiredText(value, label) {
 
 function referenceDigest(sturdyRef) {
   if (!STURDYREF.test(sturdyRef ?? "")) throw new TypeError("one canonical OCapN sturdy reference is required");
-  return `sha256:${createHash("sha256").update(sturdyRef).digest("hex")}`;
+  return sha256Digest(sturdyRef);
 }
 
 export function createSturdyRefStore({ root, now = () => new Date().toISOString() } = {}) {
