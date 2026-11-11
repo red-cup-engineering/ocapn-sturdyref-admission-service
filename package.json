@@ -1,6 +1,6 @@
 {
   "name": "@red-cup-engineering/ocapn-sturdyref-admission-service",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": false,
   "type": "module",
   "description": "Durably mints and admits unforgeable OCapN sturdy references for one exact capability locus.",
@@ -18,7 +18,7 @@
     "node": ">=22"
   },
   "dependencies": {
-    "@red-cup-engineering/cryptographic-computer-data-engineering-services-section": "workspace:*"
+    "@red-cup-engineering/cryptographic-computer-data-engineering-services-section": "^0.3.3"
   },
   "repository": {
     "type": "git",
