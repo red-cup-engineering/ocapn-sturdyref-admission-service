@@ -35,32 +35,32 @@ export function createSturdyRefStore({ root, now = () => new Date().toISOString(
   }
 
   return Object.freeze({
-    async mint({ holder, locus: location }) {
+    async mint({ holder, locus }) {
       const sturdyRef = `urn:ocapn:sturdyref:${randomBytes(32).toString("base64url")}`;
       const record = Object.freeze({
         type: "OCapNSturdyRefGrant",
         referenceDigest: referenceDigest(sturdyRef),
         holder: requiredText(holder, "holder"),
-        locus: requiredText(location, "locus"),
+        locus: requiredText(locus, "locus"),
         grantedAt: now(),
       });
       await append(record);
       return Object.freeze({ type: "OCapNSturdyRef", sturdyRef, holder: record.holder, locus: record.locus });
     },
-    async admit({ sturdyRef, locus: location }) {
+    async admit({ sturdyRef, locus }) {
       const digest = referenceDigest(sturdyRef);
-      const expectedLocation = requiredText(location, "locus");
+      const expectedLocus = requiredText(locus, "locus");
       const grant = (await records()).findLast(
         (record) => record.type === "OCapNSturdyRefGrant" && record.referenceDigest === digest,
       );
-      const validated = grant !== undefined && grant.locus === expectedLocation;
+      const admitted = grant !== undefined && grant.locus === expectedLocus;
       const receipt = Object.freeze({
         type: "OCapNSturdyRefAdmission",
         referenceDigest: digest,
-        locus: expectedLocation,
+        locus: expectedLocus,
         holder: grant?.holder ?? null,
-        admitted: validated,
-        reason: validated ? null : grant === undefined ? "unknown-sturdyref" : "locus-not-granted",
+        admitted,
+        reason: admitted ? null : grant === undefined ? "unknown-sturdyref" : "locus-not-granted",
         observedAt: now(),
       });
       await append(receipt);
