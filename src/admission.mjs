@@ -1,5 +1,6 @@
+import { randomBase64Url } from "@red-cup-engineering/cryptographic-computer-data-engineering-services-section/integrity";
 import { appendFile, mkdir, readFile } from "node:fs/promises";
-import { randomBytes } from "node:crypto";
+
 import { dirname, join } from "node:path";
 import { sha256Digest, sha256Hex } from "@red-cup-engineering/cryptographic-computer-data-engineering-services-section/integrity";
 
@@ -36,7 +37,7 @@ export function createSturdyRefStore({ root, now = () => new Date().toISOString(
 
   return Object.freeze({
     async mint({ holder, locus }) {
-      const sturdyRef = `urn:ocapn:sturdyref:${randomBytes(32).toString("base64url")}`;
+      const sturdyRef = `urn:ocapn:sturdyref:${randomBase64Url(32)}`;
       const record = Object.freeze({
         type: "OCapNSturdyRefGrant",
         referenceDigest: referenceDigest(sturdyRef),
