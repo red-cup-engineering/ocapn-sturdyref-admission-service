@@ -1,7 +1,7 @@
+import { sha256Digest, sha256Hex } from "@red-cup-engineering/semiotic-content-address-system";
 import { randomBase64Url } from "@red-cup-engineering/cryptographic-computer-data-engineering-services-section/integrity";
 import { each, put } from "@red-cup-engineering/semiotic-eavt-engineering-services-section/store";
 import { nowInstantText } from "@red-cup-engineering/time-data-engine";
-import { sha256Digest, sha256Hex } from "@red-cup-engineering/cryptographic-computer-data-engineering-services-section/integrity";
 
 const STURDYREF = /^urn:ocapn:sturdyref:[A-Za-z0-9_-]{43}$/u;
 const TEXT = /^[^\u0000-\u001f\u007f]+$/u;
