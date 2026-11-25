@@ -1,7 +1,6 @@
 import { randomBase64Url } from "@red-cup-engineering/cryptographic-computer-data-engineering-services-section/integrity";
-import { appendFile, mkdir, readFile } from "node:fs/promises";
-
-import { dirname, join } from "node:path";
+import { each, put } from "@red-cup-engineering/semiotic-eavt-engineering-services-section/store";
+import { nowInstantText } from "@red-cup-engineering/time-data-engine";
 import { sha256Digest, sha256Hex } from "@red-cup-engineering/cryptographic-computer-data-engineering-services-section/integrity";
 
 const STURDYREF = /^urn:ocapn:sturdyref:[A-Za-z0-9_-]{43}$/u;
@@ -17,23 +16,13 @@ function referenceDigest(sturdyRef) {
   return sha256Digest(sturdyRef);
 }
 
-export function createSturdyRefStore({ root, now = () => new Date().toISOString() } = {}) {
-  const ledger = join(requiredText(root, "store root"), "ocapn-sturdyref-admission.jsonl");
+export function createSturdyRefStore({ root, now = nowInstantText } = {}) {
+  requiredText(root, "store root");
 
-  async function records() {
-    try {
-      return (await readFile(ledger, "utf8")).split("\n").filter(Boolean).map((line) => JSON.parse(line));
-    } catch (error) {
-      if (error?.code === "ENOENT") return [];
-      throw error;
-    }
-  }
+  /** The sturdy-reference grants and admissions, oldest first, as rows of the `sturdyref-admission` records. */
+  async function records() { return [...each(root, "sturdyref-admission")].map(({ record }) => record); }
 
-  async function append(record) {
-    await mkdir(dirname(ledger), { recursive: true });
-    await appendFile(ledger, `${JSON.stringify(record)}\n`, { encoding: "utf8", mode: 0o600 });
-    return record;
-  }
+  async function append(record) { put(root, "sturdyref-admission", record); return record; }
 
   return Object.freeze({
     async mint({ holder, locus }) {
